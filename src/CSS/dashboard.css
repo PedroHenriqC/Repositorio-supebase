@@ -1,0 +1,108 @@
+.dashboard{
+    display:flex;
+    height:100vh;
+    font-family:Arial;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:230px;
+    background:#111827;
+    color:white;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.sidebar nav{
+    margin-top:40px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.sidebar a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.sidebar a:hover{
+    background:#1f2937;
+}
+
+.active{
+    background:#2563eb;
+}
+
+.logout{
+    background:#ef4444;
+    border:none;
+    padding:10px;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+}
+
+/* MAIN */
+
+.main{
+    flex:1;
+    background:#f3f4f6;
+}
+
+.header{
+    background:white;
+    padding:20px;
+    border-bottom:1px solid #ddd;
+}
+
+/* CARDS */
+
+.cards{
+    padding:25px;
+    display:flex;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    width:250px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+}
+
+.card p{
+    font-size:14px;
+    color:#666;
+}
+
+.card h2{
+    font-size:22px;
+}
+
+.green{
+    border-left:5px solid #22c55e;
+}
+
+.blue{
+    border-left:5px solid #3b82f6;
+}
+
+.purple{
+    border-left:5px solid #8b5cf6;
+}

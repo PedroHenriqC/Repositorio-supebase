@@ -1,26 +1,36 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { Sidebar } from './components/Sidebar';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { Sidebar } from "./components/Sidebar";
 
-// Importação das páginas que criamos
-import { Login } from './pages/Login';
-import { Dashboard } from './pages/Dashboard';
-import { Clients } from './pages/Clients';
-import { Products } from './pages/products';
-import { Sales } from './pages/Sales';
+import { Login } from "./pages/Login";
+import { Dashboard } from "./pages/Dashboard";
+import { Clients } from "./pages/Clients";
+import { Products } from "./pages/Products";
+import { Sales } from "./pages/Sales";
 
-// Componente para proteger rotas e aplicar o Layout (Sidebar)
-const Layout = ({ children }) => {
+const Layout = () => {
   const { user, loading } = useAuth();
 
-  if (loading) return <div className="flex h-screen items-center justify-center">Carregando...</div>;
+  if (loading)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        Carregando...
+      </div>
+    );
   if (!user) return <Navigate to="/login" replace />;
 
   return (
     <div className="flex">
       <Sidebar />
-      <main className="flex-1 ml-64 min-h-screen bg-gray-50">
-        {children}
+
+      <main className="flex-1 ml-64 min-h-screen bg-gray-50 p-6">
+        <Outlet />
       </main>
     </div>
   );
@@ -31,16 +41,18 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Rota Pública */}
+          {/* rota pública */}
           <Route path="/login" element={<Login />} />
 
-          {/* Rotas Protegidas com Sidebar */}
-          <Route path="/" element={<Layout><Dashboard /></Layout>} />
-          <Route path="/clientes" element={<Layout><Clients /></Layout>} />
-          <Route path="/produtos" element={<Layout><Products /></Layout>} />
-          <Route path="/vendas" element={<Layout><Sales /></Layout>} />
+          {/* rotas protegidas */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/clientes" element={<Clients />} />
+            <Route path="/produtos" element={<Products />} />
+            <Route path="/vendas" element={<Sales />} />
+          </Route>
 
-          {/* Redirecionamento padrão */}
+          {/* fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
